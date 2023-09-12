@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+    env: ready
+  type: LoadBalancer
+# status: 
+  # LoadBalancer: {}
+
+  # type: NodePort
+  # ports:
+  # - nodePort: 30001 # puerto del node
+  #   port: 80 # puerto del servicio
+  #   protocol: TCP
+  #   targetPort: 80 # puerto de los Pods receptores
+

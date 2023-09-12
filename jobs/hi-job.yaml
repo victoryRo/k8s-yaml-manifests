@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hi-job
+spec:
+  # elimina este job y los pods creados por el 30 segundos despues de haber finalizado la tarea
+  # ttlSecondsAfterFinished: 30
+  # lanzara el Nº pods especificados en paralelo y los hara ejecutar al mismo tiempo
+  # parallelism: 5
+  # lanzara el Nº pods especificados uno despues de otro
+  completions: 10
+  # en caso de fallo intentara reiniciar los pods 3 veces
+  # si restartPolicy es OnFailure
+  backoffLimit: 3
+  # decidimos terminar un job despues de un periodo de tiempo en segundos
+  # activeDeadlineSeconds: 25
+  template:
+    metadata:
+      name: hi-job
+    spec:
+      # reinicia el pod o el contenedor en caso de fallo
+      restartPolicy: OnFailure
+      containers:
+        - name: hi-container
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args: ["echo 'hello world!' sleep 3"]

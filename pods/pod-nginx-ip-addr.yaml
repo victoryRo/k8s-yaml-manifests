@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: pod-nginx-ip-addr
+spec:
+  containers:
+  - image: nginx:latest
+    name: ip-addr-container
+    ports:
+    - containerPort: 80
+

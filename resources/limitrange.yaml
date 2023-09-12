@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: my-limit-range
+spec:
+  limits:
+  # hace cumplir los valores limite por default para memory y cpu
+  # si no los aplica a nivel de pod cada contenedor heredara
+  # estos por default del LimitRange
+  - default:
+      memory: 256Mi
+      cpu: 500m
+    # si no establece la opcion resources.requests por contenedor
+    # cada contenedor heredara estos por default
+    defaultRequest:
+      memory: 128Mi
+      cpu: 250Mib
+    # limite maximo que puede establecer un pod
+    # no se puede configurar un pod con un valor limit igual a este
+    max:
+      memory: 1000Mi
+      cpu: 1Gib
+    # cantidad mínima de recursos de cómputo que puede solicitar un Pod
+    # la opcion defaultRequest no puede ser inferior a esta
+    min:
+      memory: 128Mi
+      cpu: 250m
+    type: Container
+
+# Finalmente, tenga en cuenta que si omite las opciones default y defaultRequest,
+# la opcion max se usará como la default
+# y la opcion min se usará como la default
+
+# ¡Al menos con LimitRange, estos objetos tendrán límites y solicitudes predeterminados!
+

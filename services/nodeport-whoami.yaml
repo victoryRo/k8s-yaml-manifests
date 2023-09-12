@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-whoami
+spec:
+  # Nodeport conecta nuestros pods con el mundo exterior
+  type: NodePort
+  selector:
+    app: whoami
+  ports:
+  - nodePort: 30001 # puerto del nodo
+    port: 80        # puerto del servicio
+    targetPort: 80  # puerto de los pods receptores

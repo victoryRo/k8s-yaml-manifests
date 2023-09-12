@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-cmd
+spec:
+  containers:
+  - name: liveness-cmd-container
+    image: nginx
+    livenessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      exec:
+        command:
+        - cat
+        - /hello/world
+

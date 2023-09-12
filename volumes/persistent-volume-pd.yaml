@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: persistent-volume-pd
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  gcePersistentDisk:
+    pdName: xxxx
+    fsType: ext4
+
+# la configuración debajo de gcePersistentDisk,
+# que, esta vez, apunta a un PD creado en Google Cloud.
+# Kubernetes es tan versátil que puede buscar y usar
+# diferentes soluciones de almacenamiento en la nube así como así.

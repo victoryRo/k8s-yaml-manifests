@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-bare-sample
+  labels:
+    app: nginx
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.17
+    ports:
+    - containerPort: 80
+
+# primero ejecutamos nginx-replicaset.yaml que creara y supervisara tres pods
+# luego ejecutamos este pod nginx-pod-bare.yaml, luego nuestro replicaset comprueba 
+# que este pod contiene los labels que el selector del replicaset requiere 
+# entonces en lugar de hacer uso de este pod lo elimina por que ya cumple con su requerimiento
+# el cual es la cantidad de replicas que posee

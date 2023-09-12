@@ -1,0 +1,27 @@
+# Este objeto ReplicationController tendrá una tarea sencilla:
+# mantener tres réplicas de un nginx Pod con etiquetas de metadatos específicas.
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-replica-control-sample
+spec:
+  # réplicas de Pod que deben ejecutarse
+  replicas: 3
+  # selector de etiquetas, que define cómo identificar los Pods
+  # que el objeto ReplicationController posee o adquiere
+  selector:
+    app: nginx
+    env: test
+  # Define la plantilla para la creación de pods
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: test
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17
+        ports:
+        - containerPort: 80

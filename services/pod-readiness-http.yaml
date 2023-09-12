@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: readiness-http
+spec:
+  containers:
+  - name: readiness-http-container
+    image: nginx
+    # comprueba que el pod esta listo para recibir trafico desde un servicio
+    readinessProbe:
+      # esperará en segundos la sonda antes de ejecutar la primera comprobación de estado.
+      initialDelaySeconds: 5
+      # esperará en segundos la sonda entre comprobaciones de estado consecutivas.
+      periodSeconds: 5
+      httpGet:
+        path: /ready
+        port: 80

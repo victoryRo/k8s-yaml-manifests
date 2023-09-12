@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-with-resources
+  namespace: test-ns
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    # recursos informaticos para el uso exclusivo de este contenedor
+    resources:
+      # si establezco una solicitud de recursos (TAMBIEN)
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      # debo establecer un limite de recursos
+      limits:
+        memory: "1Gi"
+        cpu: "1000m"
+

@@ -1,0 +1,19 @@
+# Este recurso debe ser creado dentro de un namespace personalizado
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-hostpath-pvc
+spec:
+  # debe especificar el acces mode del pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # este selector debe hacer match con los labels dentro de pv
+  selector:
+    matchLabels:
+      type: hostpath
+      env: prod
+

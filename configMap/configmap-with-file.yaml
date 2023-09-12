@@ -1,0 +1,11 @@
+# ConfigMap resource
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-with-file
+data:
+  color: "green"
+  # with file
+  cmapfile.txt: |
+    This means the file not work very well
+

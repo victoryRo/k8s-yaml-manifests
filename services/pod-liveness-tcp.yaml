@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-tcp
+spec:
+  containers:
+  - name: liveness-tcp-container
+    image: nginx
+    livenessProbe:
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      tcpSocket:
+        port: 80

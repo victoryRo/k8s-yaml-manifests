@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-dynamic-hostpath-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: hostpath # nombre del storageClass
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      type: hostpath
+      env: prod
+

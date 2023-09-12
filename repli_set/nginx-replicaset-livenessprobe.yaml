@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset-livenessprobe
+spec:
+  replicas: 3
+  selector:
+    # coincidencia debe ser igualdad
+    matchLabels:
+      app: nginx
+    # debe coincidir con alguna expresion dada
+    matchExpressions:
+    - key: env
+      operator: In
+      values:
+      - pro
+      - test
+  # aqui iniciamos la creacion de nuestros pods
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: pro
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17 
+        ports:
+        - containerPort: 80
+        # test a la salud de contenedor,
+        # si falla es reiniciado
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 2
+          periodSeconds: 2
+

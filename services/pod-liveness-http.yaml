@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: liveness-http
+spec:
+  containers:
+  - name: liveness-http-container
+    image: nginx
+    # comprueba el correcto funcionamiento del pod
+    # si encuentra fallas se eliminara
+    livenessProbe:
+      # esperará en segundos la sonda antes de ejecutar la primera comprobación de estado.
+      initialDelaySeconds: 5
+      # esperará en segundos la sonda entre comprobaciones de estado consecutivas.
+      periodSeconds: 5
+      # segundos a esperar antes del tiempo de espera de periodSeconds
+      timeoutSeconds: 10
+      # cantidad de intentos existoso para considerar que el pod esta listo
+      successThreshold: 2
+      # cantidad de intentos fallidos para pasar a eliminar este Pod
+      failureThreshold: 2
+      httpGet:
+        path: /healthcheck
+        port: 80
+        httpHeaders:
+        - name: my-custom-header
+          value: my-custom-header-value

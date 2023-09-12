@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-sample
+spec:
+  # cantidad de pods
+  replicas: 3
+  # selector, que define cómo identificar los Pods que posee el ReplicaSet subyacente
+  selector:
+    # igualdad de coincidencias
+    matchLabels:
+      app: nginx
+      env: test
+  minReadySeconds: 10
+  # estrategia utilizada para reemplazar los Pods existentes por otros nuevos
+  strategy:
+    # por default (actualizacion continua)
+    type: RollingUpdate
+    # funciona reemplazando lentamente los Pods de la versión anterior,
+    # uno por uno, utilizando los Pods de la nueva versión.
+    # Esto garantiza cero tiempo de inactividad y,
+    # junto con los objetos de servicio y las pruebas de preparación,
+    # proporciona equilibrio de carga de tráfico a los pods que pueden atender el tráfico entrante.
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  # plantilla para la creación de Pod
+  template:
+    metadata:
+      # deben coincidir con nuestro selector
+      # ya sea por igualdad o conjunto de coincidencias
+      labels:
+        app: nginx
+        env: test
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17
+        ports:
+        - containerPort: 80
+
+# este objeto Deployment crea un ReplicaSet subyacente
+
+### Hay dos acciones importantes que puede realizar en objetos Deployment ###
+
+# Modificar template:
+# normalmente, Le gustaría cambiar la definición del Pod a una nueva versión de imagen de su aplicación.
+# Esto hará que comience un lanzamiento, según el lanzamiento strategy.
+# Modificar número de réplicas:
+# Solo cambiar el número hará que ReplicaSet aumente o disminuya la escala correctamente.

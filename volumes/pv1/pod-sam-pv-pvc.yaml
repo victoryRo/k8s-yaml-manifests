@@ -1,0 +1,18 @@
+# Este pod debe ser creado dentro del mismo namespace que el persistentVolumeClaim
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - image: nginx
+      name: nginx-container
+      volumeMounts:
+        - mountPath: "/var/www/html"
+          name: mypersistentvolume
+  # el persistentVolumeClaim se invoca como un volume
+  volumes:
+    - name: mypersistentvolume
+      persistentVolumeClaim:
+        claimName: my-hostpath-pvc

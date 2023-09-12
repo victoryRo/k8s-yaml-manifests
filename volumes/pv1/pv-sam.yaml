@@ -1,0 +1,18 @@
+# El PersistentVolume no se ejecuta en ningun namespace
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-hostpath-pv
+  # estos labels deben hacer match con el selector dentro del pvc
+  labels:
+    type: hostpath
+    env: prod
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /Users/yosoy/Kubernetes/volumes/pv1/test
+

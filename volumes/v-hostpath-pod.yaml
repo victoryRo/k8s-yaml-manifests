@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-pod
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      volumeMounts:
+      - mountPath: /var/config
+        name: host-path-v
+    - name: busybox-container
+      image: busybox:latest
+      command: ["/bin/sh"]
+      args: ["-c", "while true; do sleep 30; done;"] # previene la salida de busybox despues de completar
+  volumes:
+  - name: host-path-v
+    hostPath:
+      path: /Users/yosoy/Kubernetes/worker-node # La ruta en el worker node

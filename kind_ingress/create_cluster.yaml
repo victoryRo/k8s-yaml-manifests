@@ -1,0 +1,25 @@
+# First: create cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+kind: Cluster
+nodes:
+- role: control-plane
+  # permiten que el ingress controller se ejecute en nodos específicos que coincidan con el selector de etiquetas
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+  # permite que el host local realice solicitudes al controlador de Ingress a través de los puertos 80/443
+  extraPortMappings:
+  - containerPort: 80
+    hostPort: 8080
+    protocol: TCP
+  - containerPort: 443
+    hostPort: 44300
+    protocol: TCP
+
+# Second: apply the command
+# Apply the ingress NGINX controller with the following command:
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+

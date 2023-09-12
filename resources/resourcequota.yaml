@@ -1,0 +1,26 @@
+# La cuota de recursos es hacer cumplir algunas solicitudes y límites 
+# en todos los Pods que se lanzarán en el namespace donde se crea. 
+# Tenga en cuenta que el objeto ResourceQuota tiene como ámbito un namespace
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: my-resourcequota
+spec:
+  hard:
+    requests.cpu: "1000m"
+    requests.memory: "1Gi"
+    limits.cpu: "2000m"
+    limits.memory: "2Gi"
+    # también se pueden usar para hacer cumplir estos límites por nanamespace
+    configmaps: "10"
+    services: "5"
+
+
+# Todos los Pods combinados no podrán solicitar más de un núcleo de CPU.
+# Todos los Pods combinados no podrán solicitar más de 1 GiB de memoria.
+# Todos los Pods combinados no podrán consumir más de dos núcleos de CPU.
+# Todos los Pods combinados no podrán consumir más de 2 GiB de memoria.
+
+# especificamos el namespace donde se ejecutara el ResourceQuota
+#  $ kubectl create -f ~/resourcequota.yaml --namespace=custom-ns

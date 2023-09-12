@@ -1,0 +1,10 @@
+# ConfigMap resource
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-config-map
+data:
+  # tres valores de configuracion
+  version: "1.0"
+  env: "production"
+  status: "stable"

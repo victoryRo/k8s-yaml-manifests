@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset-sample
+spec:
+  replicas: 3
+  selector:
+    # igualdad de coincidencias
+    matchLabels:
+      app: nginx
+    # conjunto de coincidencias
+    # verfica la expresion coincidente
+    # en los labels de los pods
+    matchExpressions:
+    - key: env
+      operator: In
+      values:
+      - test
+      - dev
+  # en template creamos los pods
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: test
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17
+        ports:
+        - containerPort: 80

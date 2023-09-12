@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nginx-2-networkpolicy
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx-2 # se aplica a este pod
+  policyTypes:
+    - Ingress # permite ingreso de solicitudes
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: nginx-1 # permite salida de solicitudes desde este pod
+    ports:
+    - protocol: TCP
+      port: 80
+
+# nginx-2 ahora permite explícitamente el tráfico de entrada en el puerto 80 desde nginx-1; todo lo demás es negado.
+# nginx-1 no tiene NetworkPolicy y, por lo tanto, se le permite el tráfico de salida a todo.

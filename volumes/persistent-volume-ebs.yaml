@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: persistent-volume-ebs
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  awsElasticBlockStore:
+    volumeId: vol-xxx
+    fsType: ext4
+
+# Como puede ver, en este YAML archivo, awsElasticBlockStore indica que este PersistentVolume objeto
+# apunta a un volumen en mi cuenta de AWS.
+# El volumen exacto de Amazon EBS se identifica mediante la volumeId clave. Y eso es todo.
+# Con este archivo YAML,
+# Kubernetes es capaz de encontrar el volumen de EBS adecuado
+# y mantener un puntero a ello gracias a esta PersistentVolume entrada.
