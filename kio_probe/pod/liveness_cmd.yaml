@@ -1,0 +1,38 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+# livenessProbe with commandj
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "liveness-cmd"
+  namespace: probe
+  labels:
+    test: "liveness-cmd"
+spec:
+  containers:
+  - name: liveness-cmd
+    image: "registry.k8s.io/busybox"
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+---
+
+# ejecuta pod
+# kubectl apply -f ./kio_probe/pod/liveness-exec.yaml
+# revisa comportamiento
+# 30 segundos despues comprueba que falllo y se reinicia
+# kubectl describe pod liveness-exec

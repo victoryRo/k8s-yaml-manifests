@@ -1,0 +1,73 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "goproxy"
+  namespace: probe
+  labels:
+    app: "goproxy"
+spec:
+  containers:
+  - name: "goproxy"
+    image: "registry.k8s.io/goproxy:0.1"
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+    ports:
+    - containerPort: 8080 # intentara conectarse al contenedor goproxy en el port 8080
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 10
+      periodSeconds: 5
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 20
+  restartPolicy: Always
+---
+
+# Utilice un puerto con nombre
+ports:
+- name: liveness-port
+  containerPort: 8080
+  hostPort: 8080
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: liveness-port
+---
+
+# Proteja los contenedores de inicio lento con sondas de inicio
+ports:
+- name: liveness-port
+  containerPort: 8080
+  hostPort: 8080
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: liveness-port
+  failureThreshold: 1
+  periodSeconds: 10
+
+startupProbe:
+  httpGet:
+    path: /healthz
+    port: liveness-port
+  failureThreshold: 30
+  periodSeconds: 10
+
+# Gracias al sondeo de inicio, la aplicación tendrá un máximo de 5 minutos (30*10 = 300s) para finalizar su inicio. 
+# Una vez que la prueba de inicio ha tenido éxito una vez, 
+# la prueba de actividad se hace cargo para proporcionar una respuesta rápida a los bloqueos de contenedores. 
+# Si la prueba de inicio nunca tiene éxito, 
+# el contenedor se desactiva después de 300 segundos y queda sujeto a las acciones del pod restartPolicy.
+
+
