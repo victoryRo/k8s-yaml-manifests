@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-rolling
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+    matchExpressions:
+    - key: env
+      operator: In
+      values:
+      - test
+      - ready
+  # tiempo additional para estar listo
+  # antes de que se anuncie como exitoso
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  # pods
+  template:
+    metadata:
+      labels:
+        app: nginx
+        env: ready
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.18
+        ports:
+        - containerPort: 80
+        command:
+        - /bin/sh
+        - -c
+        - |
+          touch /usr/share/nginx/html/ready
+          echo "You have ben served by Pod with IP address: $(hostname -i)" > /usr/share/nginx/html/index.html
+          nginx -g "daemon off;"
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 80
+          initialDelaySeconds: 5  # consultas después de 5 segundos
+          periodSeconds: 2        # realizar consultas en intervalos de 2 segundos
+          timeoutSeconds: 10      # cantidad de segundos, después de los cuales se agota el tiempo de espera de la solicitud
+          successThreshold: 1     # número mínimo de consultas exitosas consecutivas de la sonda antes de que se considere exitosa
+          failureThreshold: 2     # número mínimo de consultas fallidas consecutivas de la sonda antes de que se considere que ha fallado
+
+# -c es un argumento a favor /bin/sh que le indica que lo que sigue es un comando que se ejecutará en el shell.
+# (hostname -i) es el comando que se utiliza para obtener la dirección IP del contenedor

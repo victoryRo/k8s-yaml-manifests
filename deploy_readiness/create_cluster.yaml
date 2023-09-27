@@ -19,7 +19,3 @@ nodes:
     hostPort: 44300
     protocol: TCP
 
-# Second: apply the command
-# Apply the ingress NGINX controller with the following command:
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-
