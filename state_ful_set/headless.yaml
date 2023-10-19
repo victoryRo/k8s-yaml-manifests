@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless
+  labels:
+    app: nginx
+spec:
+  selector:
+    app: nginx
+    env: pro
+  clusterIP: None
+  ports:
+  - port: 3002
+    name: web
+    protocol: TCP
+    targetPort: 80
+
