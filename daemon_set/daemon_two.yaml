@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"DaemonSet","metadata":{"annotations":{},"name":"nginx-daemon-set","namespace":"daemon-ns"},"spec":{"selector":{"matchLabels":{"app":"nginx-daemon","env":"test"}},"template":{"metadata":{"labels":{"app":"nginx-daemon","env":"test"}},"spec":{"containers":[{"command":["/bin/sh","-c","echo \"You have been served by Pod running on Node with IP address: $(NODE_IP)\" \u003e /usr/share/nginx/html/index.html\nnginx -g \"daemon off;\"\n"],"env":[{"name":"NODE_IP","valueFrom":{"fieldRef":{"fieldPath":"status.hostIP"}}}],"image":"nginx:1.17","name":"nginx","ports":[{"containerPort":80}]}]}}}}
+  creationTimestamp: "2023-10-31T02:57:12Z"
+  generation: 1
+  name: nginx-daemon-set
+  namespace: daemon-ns
+  resourceVersion: "1522"
+  uid: de0fef62-1199-4014-8a3e-793cee84dcf5
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: nginx-daemon
+      env: test
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx-daemon
+        env: test
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - |
+          echo "You have been served by Pod running on Node with IP address: $(NODE_IP)" > /usr/share/nginx/html/index.html
+          nginx -g "daemon off;"
+        env:
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        image: nginx:1.17
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 1
+  desiredNumberScheduled: 1
+  numberAvailable: 1
+  numberMisscheduled: 0
+  numberReady: 1
+  observedGeneration: 1
+  updatedNumberScheduled: 1
