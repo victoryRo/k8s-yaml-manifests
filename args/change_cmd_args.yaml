@@ -5,18 +5,18 @@ metadata:
 spec:
   initContainers:
   - name: my-init-container
-    image: second:30
+    image: busybox:latest
+    # image: second:30
     command: ["sleep", "15"]
   containers:
   - name: nginx-container
     image: nginx:latest
-  - name: busybox-container
-    image: busybox:latest
-    command: ["sleep"] # Corresponds to the ENTRYPOINT
-    args: ["60"] # Corresponds to CMD
+  # - name: busybox-container
+    # image: busybox:latest
+    # command: ["sleep"] # Corresponds to the ENTRYPOINT
+    # args: ["60"] # Corresponds to CMD
 
 # Sobreescribe los comandos que debe ejecutar el contenedor en cuestion
 # dentro de Dockerfile:
 # ENTRYPOINT: ["CMD"] = corresponde al (command)
 # CMD:        ["args"] = corresponde al (args)
-

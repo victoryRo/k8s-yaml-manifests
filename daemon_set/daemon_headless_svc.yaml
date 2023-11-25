@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: daemon-headless
+  namespace: daemon-ns
 spec:
   selector:
     app: nginx-daemon

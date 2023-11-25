@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-11-10T01:23:03Z"
+  generateName: hello-minikube-59d4768566-
+  labels:
+    app: hello-minikube
+    pod-template-hash: 59d4768566
+  name: hello-minikube-59d4768566-gldpq
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: hello-minikube-59d4768566
+    uid: bb9c6a12-0657-4526-a082-3c631b7e39a9
+  resourceVersion: "2743"
+  uid: 2e60d451-bfd7-422d-9118-c6a6a5e1c84d
+spec:
+  containers:
+  - image: kicbase/echo-server:1.0
+    imagePullPolicy: IfNotPresent
+    name: echo-server
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-bvtq9
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-bvtq9
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-10T01:23:03Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-10T01:23:10Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-10T01:23:10Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-11-10T01:23:03Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://aefe94e0043891580515449926af7332a9084ec68d22f54ecb43c55778ccaa21
+    image: kicbase/echo-server:1.0
+    imageID: docker-pullable://kicbase/echo-server@sha256:127ac38a2bb9537b7f252addff209ea6801edcac8a92c8b1104dacd66a583ed6
+    lastState: {}
+    name: echo-server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2023-11-10T01:23:09Z"
+  hostIP: 172.17.0.2
+  phase: Running
+  podIP: 10.244.0.7
+  podIPs:
+  - ip: 10.244.0.7
+  qosClass: BestEffort
+  startTime: "2023-11-10T01:23:03Z"

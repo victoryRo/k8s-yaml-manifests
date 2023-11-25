@@ -9,5 +9,6 @@ spec:
     app: whoami
   ports:
   - nodePort: 30001 # puerto del nodo
+    protocol: TCP
     port: 80        # puerto del servicio
     targetPort: 80  # puerto de los pods receptores

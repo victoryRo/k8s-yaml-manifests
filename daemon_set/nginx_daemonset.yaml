@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: nginx-daemon-set
+  namespace: daemon-ns
 spec:
   selector:
     matchLabels:

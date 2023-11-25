@@ -4,40 +4,46 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="baae8eb7-5241-4c5a-91a8-829ff0f68f91" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/daemon_set/nginx_daemonset.yaml" afterDir="false" />
+    <list default="true" id="2d48b8b1-8660-4c2e-b905-b64a944d369e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Kubernetes.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/args/change-cmd-args.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/args/change-cmd-args.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daemon_set/daemon_headless_svc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/daemon_set/daemon_headless_svc.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daemon_set/nginx_daemonset.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/daemon_set/nginx_daemonset.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobs/hi-job.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobs/hi-k8s-cronjob.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pods/nginx-pod.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pods/pod-multi-container.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pods/pod-nginx-ip-addr.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/nodeport-whoami.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/services/nodeport-whoami.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodyActiveAccount">
-    <option name="activeAccountId" value="d5432f3f-a761-4071-9df1-e7efb0d05aec" />
-  </component>
-  <component name="GOROOT" url="file:///usr/local/opt/go/libexec" />
+  <component name="GOROOT" url="file:///opt/local/lib/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiProvider">{
-  &quot;isMigrated&quot;: true
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2XGuKzEODhabCskrDUZuCPPr5VK" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2YbHRDSo3PAXKHDGhCeRyTiiCeY" />
   <component name="ProjectViewState">
-    <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="openDirectoriesWithSingleClick" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.CodyProjectSettingsMigration": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
@@ -45,13 +51,12 @@
     "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "daemonset",
+    "git-widget-placeholder": "main",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/Users/yosoy",
     "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "node.js.selected.package.eslint": "(autodetect)"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
