@@ -16,4 +16,4 @@ spec:
   volumes:
   - name: host-path-v
     hostPath:
-      path: /Users/yosoy/Kubernetes/worker-node # La ruta en el worker node
+      path: /Users/yosoy/Kubernetes/k8s_yaml_manifests/worker_node # La ruta en el worker node
